@@ -11,6 +11,7 @@ type PaginationProps = {
 const Pagination = ({ totalItem, onPageIndexClick }: PaginationProps) => {
   const [index, setIndex] = useState<number>(1);
   const [pageIndexes, setPageIndexes] = useState<number[]>([]);
+  const [filteredPageIndexes, setFilteredPageIndexes] = useState<number[]>([]);
 
   useEffect(() => {
     const arr: any[] = [];
@@ -25,11 +26,12 @@ const Pagination = ({ totalItem, onPageIndexClick }: PaginationProps) => {
     setPageIndexes(arr);
   }, [totalItem]);
 
-  const filteredPageIndexes = useMemo(() => {
+  useEffect(() => {
     if (index === 1) {
-      return pageIndexes.slice(0, 3);
+      setFilteredPageIndexes(pageIndexes.slice(0, 3));
+    } else {
+      setFilteredPageIndexes(pageIndexes.slice(index - 2, index + 1));
     }
-    return pageIndexes.slice(index - 2, index + 1);
   }, [index, pageIndexes]);
 
   const goToFirst = useCallback(() => {
