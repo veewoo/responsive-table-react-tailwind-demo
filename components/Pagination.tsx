@@ -49,19 +49,19 @@ const Pagination = ({ totalItem, onPageIndexClick }: PaginationProps) => {
     <div className="flex justify-end items-end">
       <Button content="<" onButtonClick={goToFirst} />
       <span className="mr-2">...</span>
-      {filteredPageIndexes.map((o) => (
+      {filteredPageIndexes.map((pageIndex) => (
         <button
-          key={"pageIndex-" + o}
+          key={"pageIndex-" + pageIndex}
           className={
             "mr-2 border border-slate-600 p-2" +
-            (o === index ? " bg-slate-600 text-white" : "")
+            (pageIndex === index ? " bg-slate-600 text-white" : "")
           }
           onClick={() => {
-            setIndex(o);
-            typeof onPageIndexClick === "function" && onPageIndexClick(o);
+            setIndex(pageIndex);
+            typeof onPageIndexClick === "function" && onPageIndexClick(pageIndex);
           }}
         >
-          {o}
+          {pageIndex}
         </button>
       ))}
       <span className="ml-2">...</span>

@@ -65,25 +65,25 @@ const Table = ({ onTableDataChange, pageNumber }: TableProps) => {
       <tbody>
         {tableData
           ?.slice((pageNumber - 1) * PAGE_SIZE, pageNumber * PAGE_SIZE)
-          .map((x, i) => (
-            <tr key={"row-" + i}>
-              <td className="border border-slate-600 px-4">{x.film}</td>
-              <td className="border border-slate-600 px-4">{x.genre}</td>
-              <td className="border border-slate-600 px-4">{x.leadStudio}</td>
+          .map((row, index) => (
+            <tr key={"row-" + index}>
+              <td className="border border-slate-600 px-4">{row.film}</td>
+              <td className="border border-slate-600 px-4">{row.genre}</td>
+              <td className="border border-slate-600 px-4">{row.leadStudio}</td>
               <td className="border border-slate-600 px-4 text-right">
-                {x.audienceScore}
+                {row.audienceScore}
               </td>
               <td className="border border-slate-600 px-4 text-right">
-                {x.profitability}
+                {row.profitability}
               </td>
               <td className="border border-slate-600 px-4 text-right">
-                {x.rottenTomatoes}
+                {row.rottenTomatoes}
               </td>
               <td className="border border-slate-600 px-4 text-right">
-                {x.worldwideGross}
+                {row.worldwideGross}
               </td>
               <td className="border border-slate-600 px-4 text-right">
-                {x.year}
+                {row.year}
               </td>
             </tr>
           ))}
