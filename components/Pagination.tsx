@@ -16,10 +16,10 @@ const Pagination = ({ totalItem, onPageIndexClick }: PaginationProps) => {
   useEffect(() => {
     const arr: any[] = [];
     const length = Math.ceil(totalItem / PAGE_SIZE);
-    if (!length) return;
-
-    for (let i = 0; i < length; i++) {
-      arr.push(i + 1);
+    if (length) {
+      for (let i = 0; i < length; i++) {
+        arr.push(i + 1);
+      }
     }
 
     setIndex(1);
@@ -47,7 +47,7 @@ const Pagination = ({ totalItem, onPageIndexClick }: PaginationProps) => {
 
   return (
     <div className="flex justify-end items-end">
-      <Button content="<" onButtonClick={goToFirst} />
+      <Button content="<<" onButtonClick={goToFirst} />
       <span className="mr-2">...</span>
       {filteredPageIndexes.map((pageIndex) => (
         <button
@@ -58,14 +58,15 @@ const Pagination = ({ totalItem, onPageIndexClick }: PaginationProps) => {
           }
           onClick={() => {
             setIndex(pageIndex);
-            typeof onPageIndexClick === "function" && onPageIndexClick(pageIndex);
+            typeof onPageIndexClick === "function" &&
+              onPageIndexClick(pageIndex);
           }}
         >
           {pageIndex}
         </button>
       ))}
       <span className="ml-2">...</span>
-      <Button content=">" onButtonClick={goToLast} />
+      <Button content=">>" onButtonClick={goToLast} />
     </div>
   );
 };
