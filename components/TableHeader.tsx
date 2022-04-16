@@ -5,7 +5,6 @@ type TableHeaderProps = {
 };
 
 const TableHeader = ({ tableHeader }: TableHeaderProps) => {
-  console.log("Table header");
   return (
     <thead>
       <tr>

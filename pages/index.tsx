@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Pagination from "../components/Pagination";
 import Table from "../components/Table";
+import Title from "../components/Title";
 
 const Home: NextPage = () => {
   const [total, setTotal] = useState<number>(0);
@@ -18,12 +19,7 @@ const Home: NextPage = () => {
 
       <main className="mt-14">
         <div className="container px-4">
-          <h1 className="text-6xl mb-6">
-            Welcome to{" "}
-            <a href="" className="text-green-400">
-              Movie Listing
-            </a>
-          </h1>
+          <Title />
         </div>
         <div className="container px-4">
           <Table pageNumber={pageNumber} onTableDataChange={setTotal} />
