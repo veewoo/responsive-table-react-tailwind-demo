@@ -46,8 +46,8 @@ const Table: React.FC<TableProps> = ({ onTableDataChange, pageNumber }) => {
       ...tableData.sort((a, b) => {
         if (sortConfig.index === -1) return 0;
         if (sortConfig.isAsc)
-          return a[sortConfig.index] < b[sortConfig.index] ? 1 : -1;
-        return a[sortConfig.index] < b[sortConfig.index] ? -1 : 1;
+          return a[sortConfig.index] < b[sortConfig.index] ? -1 : 1;
+        return a[sortConfig.index] < b[sortConfig.index] ? 1 : -1;
       }),
     ]);
   }, [sortConfig]);
