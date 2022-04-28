@@ -1,6 +1,6 @@
 import React from "react";
 
-const Title = () => {
+const Title: React.FC = () => {
   return (
     <h1 className="text-6xl mb-6">
       Welcome to{" "}
