@@ -9,6 +9,7 @@ type TableProps = {
   keyword: string;
   pageNumber: number;
   onTableDataChange: Function;
+  tableData: string[][];
 };
 
 const URL =
@@ -18,6 +19,7 @@ const Table: React.FC<TableProps> = ({
   onTableDataChange,
   pageNumber,
   keyword,
+  tableData,
 }) => {
   const [tableHeader, setTableHeader] = useState<string[]>([]);
   const [tableRows, setTableRows] = useState<string[][]>([]);
@@ -29,13 +31,10 @@ const Table: React.FC<TableProps> = ({
 
   // Fetch data from the API
   useEffect(() => {
-    axios.get(URL).then((res) => {
-      if (typeof res.data !== "string" || res.data.length === 0) return;
-      const arr = res.data.split("\n").map((str) => str.split(","));
-      setTableHeader(arr.shift() || []);
-      arr.length > 0 && setTableRows(arr);
-    });
-  }, []);
+    const arr = [...tableData];
+    setTableHeader(arr.shift() || []);
+    arr.length > 0 && setTableRows(arr);
+  }, [tableData]);
 
   // Filter the table by the keyword
   useEffect(() => {
@@ -57,13 +56,15 @@ const Table: React.FC<TableProps> = ({
     setSortConfig({ index, isAsc });
   };
 
-  return tableRows.length === 0 ? null : (
+  return (
     <table className="border-collapse border border-slate-500 table-auto w-full mb-4">
-      <TableHeader
-        tableHeader={tableHeader}
-        sortConfig={sortConfig}
-        onHeaderClick={updateSortConfig}
-      />
+      {tableHeader.length !== 0 && (
+        <TableHeader
+          tableHeader={tableHeader}
+          sortConfig={sortConfig}
+          onHeaderClick={updateSortConfig}
+        />
+      )}
       <tbody>
         {filteredTableRows
           .sort((a, b) => sortTable(a, b, sortConfig.index, sortConfig.isAsc))
