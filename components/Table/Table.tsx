@@ -113,8 +113,11 @@ function renderCell(value: string, keyword: string) {
     value = value.slice(end);
   }
 
-  return subStrings.map((item) => (
-    <span className={item.isKeyword ? "text-orange-500" : ""}>
+  return subStrings.map((item, index) => (
+    <span
+      key={item.value + index}
+      className={item.isKeyword ? "text-orange-500" : ""}
+    >
       {item.value}
     </span>
   ));
