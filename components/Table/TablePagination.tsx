@@ -16,6 +16,7 @@ const TablePagination: React.FC<TablePaginationProps> = ({
   const [pageIndexes, setPageIndexes] = useState<number[]>([]);
   const [filteredPageIndexes, setFilteredPageIndexes] = useState<number[]>([]);
 
+  // Generate the index list based on the table row length
   useEffect(() => {
     const indexes: number[] = [];
     const length = Math.ceil(totalItem / PAGE_SIZE);
@@ -29,6 +30,7 @@ const TablePagination: React.FC<TablePaginationProps> = ({
     setPageIndexes(indexes);
   }, [totalItem]);
 
+  // Update the filtered index list when user click to index buttons
   useEffect(() => {
     setFilteredPageIndexes(
       selectedIndex === 1
@@ -40,20 +42,19 @@ const TablePagination: React.FC<TablePaginationProps> = ({
   const goTo = useCallback(
     (pageIndex: number) => {
       setSelectedIndex(pageIndex);
-      typeof onPageIndexClick === "function" && onPageIndexClick(pageIndex);
+      onPageIndexClick(pageIndex);
     },
     [onPageIndexClick]
   );
 
   const goToFirst = useCallback(() => {
     setSelectedIndex(1);
-    typeof onPageIndexClick === "function" && onPageIndexClick(1);
+    onPageIndexClick(1);
   }, [onPageIndexClick]);
 
   const goToLast = useCallback(() => {
     setSelectedIndex(pageIndexes.length);
-    typeof onPageIndexClick === "function" &&
-      onPageIndexClick(pageIndexes.length);
+    onPageIndexClick(pageIndexes.length);
   }, [onPageIndexClick, pageIndexes.length]);
 
   return (

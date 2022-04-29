@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { Table, TablePagination } from "../components/Table";
+import { Table, TablePagination, TableSearch } from "../components/Table";
 import { Title } from "../components/Title";
 
 const Home: NextPage = () => {
   const [total, setTotal] = useState<number>(0);
+  const [keyword, setKeyword] = useState<string>("");
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   return (
@@ -14,7 +15,12 @@ const Home: NextPage = () => {
           <Title />
         </div>
         <div className="container px-4">
-          <Table pageNumber={pageNumber} onTableDataChange={setTotal} />
+          <TableSearch onChange={(value) => setKeyword(value.toLowerCase())} />
+          <Table
+            pageNumber={pageNumber}
+            keyword={keyword}
+            onTableDataChange={setTotal}
+          />
           <TablePagination totalItem={total} onPageIndexClick={setPageNumber} />
         </div>
       </main>
