@@ -26,6 +26,7 @@ const Table: React.FC<TableProps> = ({
     index: -1,
     isAsc: true,
   });
+
   // Fetch data from the API
   useEffect(() => {
     axios.get(URL).then((res) => {
@@ -95,32 +96,35 @@ function sortTable(
   return a[headerIndex] < b[headerIndex] ? 1 : -1;
 }
 
+// Highlight the keyword in a cell
 function renderCell(value: string, keyword: string) {
   if (!keyword) return value;
 
-  const subStrings: { isKeyword: boolean; value: string }[] = [];
+  const result: JSX.Element[] = [];
 
   while (value.length) {
     const index = value.toLowerCase().indexOf(keyword);
     if (index === -1) {
-      subStrings.push({ isKeyword: false, value });
+      result.push(<span key={"cell-value-" + result.length}>{value}</span>);
       break;
     }
 
     const end = index + keyword.length;
-    subStrings.push({ isKeyword: false, value: value.slice(0, index) });
-    subStrings.push({ isKeyword: true, value: value.slice(index, end) });
+
+    result.push(
+      <span key={"cell-value-" + result.length}>{value.slice(0, index)}</span>
+    );
+
+    result.push(
+      <span key={"cell-value-" + result.length} className="text-orange-500">
+        {value.slice(index, end)}
+      </span>
+    );
+
     value = value.slice(end);
   }
 
-  return subStrings.map((item, index) => (
-    <span
-      key={item.value + index}
-      className={item.isKeyword ? "text-orange-500" : ""}
-    >
-      {item.value}
-    </span>
-  ));
+  return result;
 }
 
 export default React.memo(Table);
