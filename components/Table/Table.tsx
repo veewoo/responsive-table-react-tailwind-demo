@@ -26,7 +26,6 @@ const Table: React.FC<TableProps> = ({
     index: -1,
     isAsc: true,
   });
-
   // Fetch data from the API
   useEffect(() => {
     axios.get(URL).then((res) => {
@@ -75,7 +74,7 @@ const Table: React.FC<TableProps> = ({
                   key={"cell-" + cellIndex}
                   className="border border-slate-600 px-4"
                 >
-                  {cell}
+                  {renderCell(cell, keyword)}
                 </td>
               ))}
             </tr>
@@ -98,18 +97,27 @@ function sortTable(
 
 function renderCell(value: string, keyword: string) {
   if (!keyword) return value;
+
   const subStrings: { isKeyword: boolean; value: string }[] = [];
 
-  let currentSubString = "";
+  while (value.length) {
+    const index = value.toLowerCase().indexOf(keyword);
+    if (index === -1) {
+      subStrings.push({ isKeyword: false, value });
+      break;
+    }
 
-  // while (value.length) {
-  //   const index = value.toLowerCase().indexOf(keyword);
-  //   if (index === -1) {
-  //     subStrings.push({ isKeyword: false, value });
-  //   } else {
-  //     subStrings.push(value.slice(0, index));
-  //   }
-  // }
+    const end = index + keyword.length;
+    subStrings.push({ isKeyword: false, value: value.slice(0, index) });
+    subStrings.push({ isKeyword: true, value: value.slice(index, end) });
+    value = value.slice(end);
+  }
+
+  return subStrings.map((item) => (
+    <span className={item.isKeyword ? "text-orange-500" : ""}>
+      {item.value}
+    </span>
+  ));
 }
 
 export default React.memo(Table);
