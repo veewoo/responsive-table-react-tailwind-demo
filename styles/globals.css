@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.index-group > button:not(:last-child) {
+  margin-right: 8px;
+}
