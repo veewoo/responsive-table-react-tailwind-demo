@@ -58,7 +58,7 @@ const TablePagination: React.FC<TablePaginationProps> = ({
   }, [onPageIndexClick, pageIndexes.length]);
 
   return (
-    <div className="flex justify-end items-end">
+    <div className="flex justify-center md:justify-end items-end">
       <Button content="<<" onClick={goToFirst} />
       <span className="mx-2">...</span>
       <div className="index-group">

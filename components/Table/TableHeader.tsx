@@ -47,12 +47,12 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   onHeaderClick,
 }) => {
   return (
-    <thead>
+    <thead className="hidden md:table-header-group bg-slate-600 text-white">
       <tr>
         {tableHeader?.map((x, i) => (
           <th
             key={"header-" + i}
-            className="border border-slate-600 px-4 text-left"
+            className="border border-slate-200 px-4 py-2 text-left"
             onClick={() =>
               typeof onHeaderClick === "function" && onHeaderClick(i)
             }

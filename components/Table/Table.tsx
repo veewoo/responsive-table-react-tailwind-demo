@@ -57,32 +57,46 @@ const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <table className="border-collapse border border-slate-500 table-auto w-full mb-4">
-      {tableHeader.length !== 0 && (
-        <TableHeader
-          tableHeader={tableHeader}
-          sortConfig={sortConfig}
-          onHeaderClick={updateSortConfig}
-        />
-      )}
-      <tbody>
-        {filteredTableRows
-          .sort((a, b) => sortTable(a, b, sortConfig.index, sortConfig.isAsc))
-          .slice((pageNumber - 1) * PAGE_SIZE, pageNumber * PAGE_SIZE)
-          .map((row, index) => (
-            <tr key={"row-" + index}>
-              {row.map((cell, cellIndex) => (
-                <td
-                  key={"cell-" + cellIndex}
-                  className="border border-slate-600 px-4"
-                >
-                  {renderCell(cell, keyword)}
-                </td>
-              ))}
-            </tr>
-          ))}
-      </tbody>
-    </table>
+    <div className="md:overflow-x-auto mb-4">
+      <table className="border-collapse border border-slate-500 table-auto w-full">
+        {tableHeader.length !== 0 && (
+          <TableHeader
+            tableHeader={tableHeader}
+            sortConfig={sortConfig}
+            onHeaderClick={updateSortConfig}
+          />
+        )}
+        <tbody>
+          {filteredTableRows
+            .sort((a, b) => sortTable(a, b, sortConfig.index, sortConfig.isAsc))
+            .slice((pageNumber - 1) * PAGE_SIZE, pageNumber * PAGE_SIZE)
+            .map((row, index) => (
+              <tr
+                className={`block md:table-row ${
+                  index % 2 === 0 ? "" : "bg-slate-200"
+                }`}
+                key={"row-" + index}
+              >
+                {row.map((cell, cellIndex) => (
+                  <td
+                    key={"cell-" + cellIndex}
+                    className="block md:table-cell border border-slate-600 px-4"
+                  >
+                    <div className="flex flex-wrap">
+                      <span className="md:hidden font-bold">
+                        {tableHeader[cellIndex]}
+                      </span>
+                      <span className="ml-auto md:ml-0">
+                        {renderCell(cell, keyword)}
+                      </span>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
