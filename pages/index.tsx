@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { InferGetStaticPropsType, NextPage } from "next";
 import { useState } from "react";
+import Footer from "../components/Footer/Footer";
 import { Table, TablePagination, TableSearch } from "../components/Table";
 import { Title } from "../components/Title";
 
@@ -47,16 +48,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <TablePagination totalItem={total} onPageIndexClick={setPageNumber} />
         </div>
       </main>
-      <footer className="mt-auto py-4 text-center">
-        Created by{" "}
-        <a
-          className="text-cyan-400"
-          href="https://github.com/veewoo"
-          target="_black"
-        >
-          Veewoo
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };

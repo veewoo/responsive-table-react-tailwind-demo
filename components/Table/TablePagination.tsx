@@ -66,7 +66,7 @@ const TablePagination: React.FC<TablePaginationProps> = ({
           <button
             key={"pageIndex-" + pageIndex}
             className={
-              "border border-slate-600 p-2" +
+              "border border-slate-600 rounded-lg p-2" +
               (pageIndex === selectedIndex ? " bg-slate-600 text-white" : "")
             }
             onClick={() => goTo(pageIndex)}

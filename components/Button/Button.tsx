@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ content, onClick }) => {
   return (
     <button
-      className="border border-slate-600 p-2"
+      className="border border-slate-600 rounded-lg p-2"
       onClick={() => typeof onClick === "function" && onClick()}
     >
       {content}

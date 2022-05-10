@@ -9,7 +9,7 @@ const TableSearch: React.FC<TableSearchProps> = ({ onChange }) => {
     <div className="flex justify-end items-end">
       <input
         type="search"
-        className="border-2 border-slate-600 p-2 mb-2"
+        className="border-2 border-slate-600 rounded-lg px-4 py-2 mb-2"
         placeholder="Search"
         onChange={(e) => onChange(e.target.value)}
       />
