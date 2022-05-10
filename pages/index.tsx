@@ -47,7 +47,16 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <TablePagination totalItem={total} onPageIndexClick={setPageNumber} />
         </div>
       </main>
-      <footer className="mt-auto py-4 text-center">Created by VeeWoo</footer>
+      <footer className="mt-auto py-4 text-center">
+        Created by{" "}
+        <a
+          className="text-cyan-400"
+          href="https://github.com/veewoo"
+          target="_black"
+        >
+          Veewoo
+        </a>
+      </footer>
     </div>
   );
 };
