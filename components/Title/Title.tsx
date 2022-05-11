@@ -2,9 +2,9 @@ import React from "react";
 
 const Title: React.FC = () => {
   return (
-    <div className="mb-6">
+    <div className="mb-8">
       <h1 className="text-6xl mb-2">
-        Welcome to{" "}
+        👋 Welcome to{" "}
         <a href="" className="text-green-400">
           Movie Listing
         </a>
